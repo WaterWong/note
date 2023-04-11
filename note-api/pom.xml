@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.open.lang</groupId>
+		<artifactId>note</artifactId>
+		<version>1.0.0.0-SNAPSHOT</version>
+	</parent>
+	<packaging>jar</packaging>
+	<name>note-api</name>
+	<artifactId>note-api</artifactId>
+	<properties>
+		<spring-boot.version>2.7.2</spring-boot.version>
+		<!-- spring boot as parent: worked-->
+		<start-class>org.open.lang.ms.note.api.NoteApiApplication</start-class>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.soul</groupId>
+			<artifactId>soul-ability-web-springmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.soul</groupId>
+			<artifactId>soul-ability-security-spring-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- service start -->
+		<dependency>
+			<groupId>org.soul</groupId>
+			<artifactId>soul-ability-data-rdb-mybatis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+		<!-- service end-->
+
+		<dependency>
+			<groupId>org.soul</groupId>
+			<artifactId>soul-ability-web-swagger</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+    </dependencies>
+
+	<build>
+		<sourceDirectory>java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>java</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+		<testSourceDirectory>test/java</testSourceDirectory>
+		<testResources>
+			<testResource>
+				<directory>test/resources</directory>
+			</testResource>
+		</testResources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot.version}</version>
+				<configuration>
+					<mainClass>org.open.lang.ms.note.api.NoteApiApplication</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

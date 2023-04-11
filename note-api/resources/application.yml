@@ -1,0 +1,17 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /note-api
+
+spring:
+  application:
+    name: note
+soul:
+  ability:
+    security:
+      jwt:
+        claims:
+          exp: 604800  # 7 days
+      spring:
+        jwt:
+          enable: true

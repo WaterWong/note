@@ -1,0 +1,26 @@
+soul:
+  ability:
+    security:
+      spring:
+        web:
+          #是否开启权限验证
+          valid-permission: true
+          urls:
+            #安全的URL:通过Security过滤器
+            security-urls:
+              authenticated:
+                - /item/**
+
+            #忽略的URL:不会经过Security过滤器
+            ignore-urls:
+              - /images/favicon.ico
+              - /v2/api-docs.html
+              - /swagger-v2/api-docs.html
+              - /actuator/**
+              - /errors/**
+
+            #忽略的URL:通过Security过滤器时忽略
+            ignore-urls-in-security:
+
+            #忽略的URL,会经过Security过滤器, 忽略CsrfFilter过滤器
+            ignore-urls-in-csrf:

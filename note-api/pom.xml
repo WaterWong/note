@@ -43,6 +43,13 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
+
+		<!--flyway依赖-->
+		<dependency>
+			<groupId>org.soul</groupId>
+			<artifactId>soul-ability-data-rdb-flyway</artifactId>
+		</dependency>
+		<!--flyway依赖 end-->
 		<!-- service end-->
 
 		<dependency>

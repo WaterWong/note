@@ -10,8 +10,8 @@
 #RUN cp /home/app/target/note-api-1.0.0.0-SNAPSHOT.jar /maven/dist
 
 FROM openjdk:17-jdk-alpine
-MAINTAINER Water.Wong
-VOLUME /tmp
+RUN mkdir -p /root/h2/data
+VOLUME ["/root/h2/data"]
 EXPOSE 8000
 ARG JAR_FILE=dist/note-api-1.0.0.0-SNAPSHOT.jar
 ADD ${JAR_FILE} note-api.jar

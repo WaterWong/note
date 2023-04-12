@@ -23,7 +23,8 @@ call ./docker-run.bat
 :: Clean up start
 call cd ../
 call echo Into folder %cd%
-call mvn clean
+call mvn -q clean
 call rm dist/*
 :: Clean up end
+pause
 exit

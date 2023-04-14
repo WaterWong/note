@@ -21,6 +21,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     @Transactional
     public SysUser signUp(SysUser sysUser) {
+        sysUser.setUsername(sysUser.getUsername().toLowerCase());
         String password = sysUser.getPassword();
         sysUser.setPassword(passwordTool.encodePassword(password, sysUser.getUsername()));
         try {
@@ -37,6 +38,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public SysUser get(String username) {
+        username = username.toLowerCase();
         return mapper.selectOne(new QueryWrapper<SysUser>()
                 .eq("username", username)
         );

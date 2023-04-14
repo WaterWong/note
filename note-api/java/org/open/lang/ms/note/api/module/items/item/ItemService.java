@@ -10,4 +10,10 @@ public interface ItemService extends IBaseCrudService<Item, String> {
 
     ItemEditModel saveOrUpdate(ItemEditModel addVo);
 
+    /**
+     * 全文
+     * @param word
+     * @return
+     */
+    List<Item> fullSearch(String createUserId, String word,String type);
 }

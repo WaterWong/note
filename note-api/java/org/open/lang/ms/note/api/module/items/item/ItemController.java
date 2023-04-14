@@ -3,6 +3,8 @@ package org.open.lang.ms.note.api.module.items.item;
 import io.swagger.annotations.Api;
 import org.open.lang.ms.note.api.module.passport.UserTool;
 import org.open.lang.ms.note.api.module.sys.SysUser;
+import org.soul.base.lang.collections.ListTool;
+import org.soul.base.lang.string.StringTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +36,15 @@ public class ItemController {
     @RequestMapping(value = {"/remove"}, method = {RequestMethod.POST})
     public boolean delete(@RequestBody @Valid ItemEditModel model) {
         return this.itemService.deleteById(model.getId());
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public List<Item> search(@RequestParam String type,@RequestParam String word) {
+        if (StringTool.isBlank(word)) {
+            return ListTool.newArrayList();
+        }
+        SysUser sysUser = UserTool.currentUser();
+        return itemService.fullSearch(sysUser.getId(),word,type);
     }
 
 

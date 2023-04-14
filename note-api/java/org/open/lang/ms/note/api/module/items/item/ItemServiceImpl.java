@@ -92,12 +92,15 @@ public class ItemServiceImpl extends BaseCrudService<Item, ItemMapper, String> i
         Criteria criteria = Criteria
                 .add(BaseEntity.FIELD_CREATE_USER_ID, OperatorEnum.EQ, createUserId)
                 .addAnd(
-                        Criteria.add(Item.FIELD_JAPANESE,OperatorEnum.LIKE,word),
-                        Criteria.add(Item.FIELD_HIRAGANA,OperatorEnum.LIKE,word),
-                        Criteria.add(Item.FIELD_CHINESE,OperatorEnum.LIKE,word)
+                        Criteria.or(
+                                Criteria.add(Item.FIELD_JAPANESE,OperatorEnum.LIKE, word),
+                                Criteria.add(Item.FIELD_HIRAGANA,OperatorEnum.LIKE, word),
+                                Criteria.add(Item.FIELD_CHINESE,OperatorEnum.LIKE, word)
+
+                        )
                 )
                 .addAnd(
-                        Criteria.add(Item.FIELD_TYPE,OperatorEnum.EQ,type)
+                        Criteria.add(Item.FIELD_TYPE,OperatorEnum.EQ, type)
                 )
                 ;
 

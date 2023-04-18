@@ -2,9 +2,9 @@ package org.open.lang.ms.note.api.module.items.item;
 
 import io.swagger.annotations.Api;
 import org.open.lang.ms.note.api.module.passport.UserTool;
-import org.open.lang.ms.note.api.module.sys.SysUser;
 import org.soul.base.lang.collections.ListTool;
 import org.soul.base.lang.string.StringTool;
+import org.soul.ms.user.common.vo.login.UserInfoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +29,7 @@ public class ItemController {
 
     @RequestMapping(value = "/recent", method = RequestMethod.GET)
     public List<ItemRecordResult> recent(@RequestParam(defaultValue = "10") int size) {
-        SysUser sysUser = UserTool.currentUser();
+        UserInfoModel sysUser = UserTool.currentUser();
         return this.itemService.recent(size, sysUser.getId());
     }
 
@@ -43,7 +43,7 @@ public class ItemController {
         if (StringTool.isBlank(word)) {
             return ListTool.newArrayList();
         }
-        SysUser sysUser = UserTool.currentUser();
+        UserInfoModel sysUser = UserTool.currentUser();
         return itemService.fullSearch(sysUser.getId(),word,type);
     }
 

@@ -15,3 +15,7 @@ soul:
       spring:
         jwt:
           enable: true
+# Print the SQL
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

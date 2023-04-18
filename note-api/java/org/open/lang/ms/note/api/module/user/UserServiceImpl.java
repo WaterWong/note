@@ -1,16 +1,17 @@
-package org.open.lang.ms.note.api.module.sys;
+package org.open.lang.ms.note.api.module.user;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.open.lang.ms.note.api.consts.CodeEnum;
 import org.soul.ability.security.common.tools.PasswordTool;
 import org.soul.base.exception.ServiceException;
+import org.soul.ms.user.provider.data.mapper.SysUserMapper;
+import org.soul.ms.user.provider.entity.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class SysUserServiceImpl implements SysUserService {
+public class UserServiceImpl implements UserService{
 
     @Autowired
     private SysUserMapper mapper;
@@ -18,7 +19,6 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private PasswordTool passwordTool;
 
-    @Override
     @Transactional
     public SysUser signUp(SysUser sysUser) {
         sysUser.setUsername(sysUser.getUsername().toLowerCase());
@@ -36,11 +36,4 @@ public class SysUserServiceImpl implements SysUserService {
         return null;
     }
 
-    @Override
-    public SysUser get(String username) {
-        username = username.toLowerCase();
-        return mapper.selectOne(new QueryWrapper<SysUser>()
-                .eq("username", username)
-        );
-    }
 }

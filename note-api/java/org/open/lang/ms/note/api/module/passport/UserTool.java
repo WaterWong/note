@@ -1,6 +1,7 @@
 package org.open.lang.ms.note.api.module.passport;
 
-import org.open.lang.ms.note.api.module.sys.SysUser;
+import org.soul.ms.user.common.vo.login.UserInfoModel;
+import org.soul.ms.user.provider.entity.SysUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -11,10 +12,10 @@ public class UserTool {
      *
      * @return
      */
-    public static SysUser currentUser() {
+    public static UserInfoModel currentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.getPrincipal() != null
-                && authentication.getPrincipal() instanceof SysUser sysUser
+                && authentication.getPrincipal() instanceof UserInfoModel sysUser
         ) {
             return sysUser;
         }

@@ -14,6 +14,8 @@ public class ExamCondition {
     private Date dateStart;
     private Date dateEnd;
 
+    private String itemType;
+
     private String createUser;
 
     public enum DateRange{

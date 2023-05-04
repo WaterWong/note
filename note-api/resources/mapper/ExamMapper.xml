@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.open.lang.ms.note.api.module.exam.ExamMapper">
+    <select id="generate" parameterType="org.open.lang.ms.note.api.module.exam.ExamCondition" resultType="org.open.lang.ms.note.api.module.items.item.Item">
+        select * from item
+        WHERE 1 = 1
+            and create_time &gt;= #{dateStart} AND create_time &lt;= #{dateEnd}
+            and create_user = #{createUser}
+        <if test="itemType != 0">
+            and type = #{type}
+        </if>
+
+    </select>
+
+</mapper>

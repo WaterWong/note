@@ -13,6 +13,7 @@ import org.soul.base.lang.string.StringTool;
 import org.soul.base.query.Criteria;
 import org.soul.base.query.enums.OperatorEnum;
 import org.soul.base.query.sort.Order;
+import org.soul.base.support.model.common.BaseAddModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -82,8 +83,12 @@ public class ItemServiceImpl extends BaseCrudService<Item, ItemMapper, String> i
                 return addVo;
             }
         }
-        Item item = insertToEntity(addVo);
-        BeanTool.copyProperties(item,addVo);
+        Item item = new Item();
+        BeanTool.copyProperties(addVo,item);
+        int rs = insert(item);
+        if (rs > 0) {
+            BeanTool.copyProperties(item,addVo);
+        }
         return addVo;
     }
 

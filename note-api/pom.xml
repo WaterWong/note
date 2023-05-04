@@ -69,8 +69,23 @@
 			<artifactId>soul-ms-user-login</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.soul</groupId>
+			<artifactId>soul-ability-security-spring-local</artifactId>
+		</dependency>
 
-    </dependencies>
+		<dependency>
+			<groupId>org.soul</groupId>
+			<artifactId>soul-tools-codegen</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+	</dependencies>
 
 	<build>
 		<sourceDirectory>java</sourceDirectory>

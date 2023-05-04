@@ -2,6 +2,7 @@ package org.open.lang.ms.note.api.module.items.favorite;
 
 import io.swagger.annotations.Api;
 import org.open.lang.ms.note.api.module.passport.UserTool;
+import org.soul.base.bean.BeanTool;
 import org.soul.base.lang.collections.CollectionTool;
 import org.soul.base.lang.collections.ListTool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ public class ItemFavoriteController {
             return itemFavoriteService.delete(itemFavorites.get(0));
         }
         //add star
-        return itemFavoriteService.insert(editModel) > 0;
+        ItemFavorite itemFavorite = new ItemFavorite();
+        BeanTool.copyProperties(editModel,itemFavorite);
+        return itemFavoriteService.insert(itemFavorite) > 0;
     }
 }

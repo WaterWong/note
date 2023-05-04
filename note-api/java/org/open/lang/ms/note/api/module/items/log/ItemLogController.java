@@ -2,6 +2,7 @@ package org.open.lang.ms.note.api.module.items.log;
 
 import io.swagger.annotations.Api;
 import org.open.lang.ms.note.api.module.passport.UserTool;
+import org.soul.base.bean.BeanTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,9 @@ public class ItemLogController {
 
     @PostMapping("/save")
     public boolean save(ItemLogEditModel itemLogEditModel) {
-        ItemLog itemLog = itemLogService.insertToEntity(itemLogEditModel);
+        ItemLog itemLog = new ItemLog();
+        BeanTool.copyProperties(itemLogEditModel,itemLog);
+        itemLogService.insert(itemLog);
         return itemLog.getId() != null;
     }
 

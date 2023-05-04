@@ -7,7 +7,7 @@
         WHERE 1 = 1
             and create_time &gt;= #{dateStart} AND create_time &lt;= #{dateEnd}
             and create_user = #{createUser}
-        <if test="itemType != 0">
+        <if test="itemType != '0'">
             and type = #{itemType}
         </if>
 

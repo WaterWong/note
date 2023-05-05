@@ -1,9 +1,12 @@
 package org.open.lang.ms.note.api.module.exam;
 
 import org.open.lang.ms.note.api.module.exam.log.ExamLogMapper;
+import org.open.lang.ms.note.api.module.exam.vo.ExamInfoResult;
 import org.open.lang.ms.note.api.module.items.item.Item;
 import org.soul.ability.data.rdb.mybatis.service.BaseCrudService;
+import org.soul.base.bean.BeanTool;
 import org.soul.base.bean.Pair;
+import org.soul.base.lang.DateTool;
 import org.soul.base.lang.collections.CollectionTool;
 import org.soul.base.query.Criteria;
 import org.soul.base.query.enums.OperatorEnum;
@@ -11,6 +14,7 @@ import org.soul.base.query.result.Paging;
 import org.soul.base.query.sort.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -23,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class ExamService extends BaseCrudService<Exam, ExamMapper, String> implements IExamService {
 
-    private ConcurrentHashMap<String,List<Item>> items = new ConcurrentHashMap();
+    private ConcurrentHashMap<String,List<Item>> itemsCache = new ConcurrentHashMap();
 
     @Autowired
     private ExamLogMapper examLogMapper;
@@ -38,8 +42,33 @@ public class ExamService extends BaseCrudService<Exam, ExamMapper, String> imple
         return null;
     }
 
+    @Transactional
+    @Override
+    public ExamInfoResult doStart(ExamCondition examCondition) {
+        String username = examCondition.getCreateUser();
+        this.itemsCache.remove(username);
+        Exam exam = new Exam();
+        exam.setCreateTime(new Date());
+        exam.setName(DateTool.formatDate(new Date(),DateTool.yyyyMMdd));
+        int rs = this.insert(exam);
+        if (rs > 0) {
+            generate(examCondition);
+            return BeanTool.copyProperties(exam,new ExamInfoResult());
+        }
+        return null;
+    }
 
-    public Item generate(ExamCondition examCondition) {
+    @Override
+    public Item doNext(String username) {
+        List<Item> cache = itemsCache.get(username);
+        if (CollectionTool.isNotEmpty(cache)) {
+            return cache.remove(0);
+        }
+        return null;
+    }
+
+
+    protected Item generate(ExamCondition examCondition) {
         Pair<Date,Date> duration = null;
         switch (examCondition.getDateRange()) {
             //0: 当前时刻 -1: 昨天0点
@@ -52,15 +81,10 @@ public class ExamService extends BaseCrudService<Exam, ExamMapper, String> imple
 
         examCondition.setDateStart(duration.getKey());
         examCondition.setDateEnd(duration.getValue());
-        List<Item> cache = items.get(examCondition.getCreateUser());
-        if (CollectionTool.isNotEmpty(cache)) {
-            return cache.remove(0);
-        }
-
         List<Item> items =  mapper.generate(examCondition);
         if (items.size() > 0 ) {
             Item item = items.remove(0);
-            this.items.put(examCondition.getCreateUser(),items);
+            this.itemsCache.put(examCondition.getCreateUser(),items);
             return item;
         }
         return null;
@@ -72,4 +96,5 @@ public class ExamService extends BaseCrudService<Exam, ExamMapper, String> imple
         Date dateEnd   = new Date(now.plus(Duration.ofDays(end)).toEpochMilli());
         return new Pair(dateStart,dateEnd);
     }
+
 }

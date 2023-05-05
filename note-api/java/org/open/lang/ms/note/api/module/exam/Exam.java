@@ -15,7 +15,7 @@ public class Exam extends BaseEntity<String> {
     private static final long serialVersionUID = 5853988512027361051L;
     /** 测验标题*/
     public final static String FIELD_NAME = "name";
-    @TableId(type= IdType.AUTO)
+    @TableId(type= IdType.ASSIGN_ID)
     private String id;
 
     /** 测验标题*/

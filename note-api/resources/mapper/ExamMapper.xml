@@ -7,10 +7,12 @@
         WHERE 1 = 1
             and create_time &gt;= #{dateStart} AND create_time &lt;= #{dateEnd}
             and create_user = #{createUser}
+            and type != '3' -- 语法无需测验
         <if test="itemType != '0'">
             and type = #{itemType}
         </if>
-
+        ORDER BY RANDOM()
+        LIMIT #{itemCount}
     </select>
 
 </mapper>

@@ -1,9 +1,10 @@
 package org.open.lang.ms.note.api.module.exam;
 
+import org.open.lang.ms.note.api.module.exam.log.ExamLog;
+import org.open.lang.ms.note.api.module.exam.log.IExamLogService;
 import org.open.lang.ms.note.api.module.exam.vo.ExamInfoResult;
 import org.open.lang.ms.note.api.module.items.item.Item;
 import org.open.lang.ms.note.api.module.passport.UserTool;
-import org.soul.base.bean.BeanTool;
 import org.soul.ms.user.common.vo.login.UserInfoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +19,13 @@ import java.util.List;
 public class ExamController {
 
     @Autowired
-    private ExamService examService;
+    private IExamService examService;
 
     @Autowired
-    private VExamService vExamService;
+    private IVExamService vExamService;
+
+    @Autowired
+    private IExamLogService examLogService;
 
     @PostMapping("/list")
     public List<VExam> list() {
@@ -30,26 +34,22 @@ public class ExamController {
     }
 
     @PostMapping("/doStart")
-    public ExamInfoResult doStart() {
+    public ExamInfoResult doStart(@RequestBody ExamCondition examCondition) {
         UserInfoModel userInfoModel = UserTool.currentUser();
-        Exam exam = new Exam();
-        int rs = examService.insert(exam);
-        if (rs > 0) {
-            return BeanTool.copyProperties(exam, new ExamInfoResult());
-        }
-        return null;
+        examCondition.setCreateUser(userInfoModel.getUsername());
+        return examService.doStart(examCondition);
+
     }
 
     @PostMapping("/doSubmit")
-    public void odSubmit() {
-
+    public boolean odSubmit(@RequestBody ExamLog examLog) {
+        return examLogService.insert(examLog) > 0;
     }
 
     @PostMapping("/doNext")
     public Item doNext(@RequestBody ExamCondition examCondition) {
         UserInfoModel userInfoModel = UserTool.currentUser();
-        examCondition.setCreateUser(userInfoModel.getUsername());
-        return examService.generate(examCondition);
+        return examService.doNext(userInfoModel.getUsername());
     }
 
     @PostMapping("/doFinish")

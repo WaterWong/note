@@ -15,6 +15,7 @@ public class ExamCondition {
     private Date dateEnd;
 
     private String itemType;
+    private int itemCount;
 
     private String createUser;
 

@@ -22,4 +22,9 @@ public class ItemEditModel extends BaseEditModel<String> {
     private String hiragana;
     @ApiModelProperty(value = "中文")
     private String chinese;
+
+    /**
+     * 读音(位置)
+     */
+    private int soundPosition;
 }

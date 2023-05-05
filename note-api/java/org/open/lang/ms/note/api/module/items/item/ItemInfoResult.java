@@ -37,4 +37,9 @@ public class ItemInfoResult implements IJsonResult {
     private String updateUser;
     @ApiModelProperty(value = "")
     private Date updateTime;
+
+    /**
+     * 读音(位置)
+     */
+    private int soundPosition;
 }

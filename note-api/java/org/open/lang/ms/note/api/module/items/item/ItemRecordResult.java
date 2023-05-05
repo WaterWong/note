@@ -18,6 +18,10 @@ public class ItemRecordResult implements IJsonResult {
     private String id;
     @ApiModelProperty(value = "詞條類型: 1=單詞, 2=句子")
     private String type;
+    /**
+     * 读音(位置)
+     */
+    private int soundPosition;
     @ApiModelProperty(value = "日文")
     private String japanese;
     @ApiModelProperty(value = "假名")

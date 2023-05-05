@@ -40,6 +40,11 @@ public class Item extends BaseEntity<String> {
      * 詞條類型: 1=單詞, 2=句子
      */
     private String type;
+
+    /**
+     * 读音(位置)
+     */
+    private int soundPosition;
     /**
      * 日文
      */
@@ -52,48 +57,5 @@ public class Item extends BaseEntity<String> {
      * 中文
      */
     private String chinese;
-
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getJapanese() {
-        return japanese;
-    }
-
-    public void setJapanese(String japanese) {
-        this.japanese = japanese;
-    }
-
-    public String getHiragana() {
-        return hiragana;
-    }
-
-    public void setHiragana(String hiragana) {
-        this.hiragana = hiragana;
-    }
-
-    public String getChinese() {
-        return chinese;
-    }
-
-    public void setChinese(String chinese) {
-        this.chinese = chinese;
-    }
 
 }

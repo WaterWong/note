@@ -21,4 +21,3 @@ comment on column "exam_log"."result" is '詞條数量';
 comment on column "exam_log"."question" is '原文';
 comment on column "exam_log"."answer" is '答案';
 
-

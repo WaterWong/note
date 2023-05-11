@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ItemService extends IBaseCrudService<Item, String> {
 
-    List<ItemRecordResult> recent(int size,String createUserId);
+    List<ItemRecordResult> recent(int pageNo,int pageSize,String createUserId);
 
     ItemEditModel saveOrUpdate(ItemEditModel addVo);
 

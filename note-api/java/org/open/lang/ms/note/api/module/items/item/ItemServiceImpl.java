@@ -32,11 +32,11 @@ public class ItemServiceImpl extends BaseCrudService<Item, ItemMapper, String> i
     private ItemLogService itemLogService;
 
     @Override
-    public List<ItemRecordResult> recent(int size, String createUserId) {
+    public List<ItemRecordResult> recent(int pageNo,int pageSize, String createUserId) {
         Criteria criteria = Criteria
                 .add(BaseEntity.FIELD_CREATE_USER_ID, OperatorEnum.EQ, createUserId);
 
-        List<Item> items = mapper.pagingSearch(criteria, 1, size, Order.desc(BaseEntity.FIELD_CREATE_TIME)).getKey();
+        List<Item> items = mapper.pagingSearch(criteria, pageNo, pageSize, Order.desc(BaseEntity.FIELD_CREATE_TIME)).getKey();
 
         List<ItemRecordResult> results = items.stream()
                 .map(a -> {

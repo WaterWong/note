@@ -28,9 +28,12 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/recent", method = RequestMethod.GET)
-    public List<ItemRecordResult> recent(@RequestParam(defaultValue = "10") int size) {
+    public List<ItemRecordResult> recent(
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam int pageNo)
+    {
         UserInfoModel sysUser = UserTool.currentUser();
-        return this.itemService.recent(size, sysUser.getId());
+        return this.itemService.recent(pageNo,pageSize, sysUser.getId());
     }
 
     @RequestMapping(value = {"/remove"}, method = {RequestMethod.POST})

@@ -30,7 +30,7 @@ public class ItemController {
     @RequestMapping(value = "/recent", method = RequestMethod.GET)
     public List<ItemRecordResult> recent(
             @RequestParam(defaultValue = "10") int pageSize,
-            @RequestParam int pageNo)
+            @RequestParam(defaultValue = "1") int pageNo)
     {
         UserInfoModel sysUser = UserTool.currentUser();
         return this.itemService.recent(pageNo,pageSize, sysUser.getId());

@@ -1,0 +1,7 @@
+fserver:
+  root:
+    # 文件服务器 - 本地目录
+    location: /root/h2/data
+
+    #文件服务器 - 外网根URL
+    public-endpoint: https://note.soulworld.net/note-api/files

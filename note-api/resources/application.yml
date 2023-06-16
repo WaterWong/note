@@ -1,11 +1,13 @@
 server:
-  port: 6000
+  port: 8080
   servlet:
     context-path: /note-api
 
 spring:
   application:
     name: note
+  profiles:
+    active: dev
 soul:
   ability:
     security:
@@ -15,6 +17,15 @@ soul:
       spring:
         jwt:
           enable: true
+
+  ms:
+    fserver:
+      api:
+        view:
+          list-enable: false
+          location: ${fserver.root.location}
+          public-endpoint: ${fserver.root.public-endpoint}
+
 # Print the SQL
 #mybatis-plus:
 #  configuration:

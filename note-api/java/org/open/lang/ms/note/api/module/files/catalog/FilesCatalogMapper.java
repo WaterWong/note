@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 @Mapper
-public interface FilesCatalogMapper extends IBaseCrudMapper<FilesCatalog, Long> {
+public interface FilesCatalogMapper extends IBaseCrudMapper<FilesCatalog, String> {
 
     List<ItemRecordResult> recent(int size);
 }

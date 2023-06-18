@@ -1,4 +1,4 @@
-package org.open.lang.ms.note.api.module.files.catalog;
+package org.open.lang.ms.note.api.module.files.catalogrel;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -8,21 +8,17 @@ import lombok.Setter;
 import org.soul.base.bean.IEntity;
 import org.soul.base.support.model.common.BaseIdModel;
 
-import javax.validation.constraints.NotEmpty;
-
 @Getter
 @Setter
-@TableName("files_catalog")
-public class FilesCatalog implements IEntity<String> {
+@TableName("files_catalog_rel")
+public class FilesCatalogRel implements IEntity<String> {
 
-
-    public static final String DESC = "desc";
 
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
 
-    @NotEmpty(message = "不能为空")
-    private String desc;
+    private Long fileCatalogId;
 
+    private String fileId;
 
 }

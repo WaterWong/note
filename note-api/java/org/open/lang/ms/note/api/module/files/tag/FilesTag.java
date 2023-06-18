@@ -13,13 +13,13 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @Setter
 @TableName("files_tag")
-public class FilesTag extends BaseIdModel<Long> {
+public class FilesTag implements IEntity<String> {
 
 
     public static final String DESC = "desc";
 
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     @NotEmpty(message = "不能为空")
     private String desc;

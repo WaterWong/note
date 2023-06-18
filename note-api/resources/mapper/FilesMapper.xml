@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.open.lang.ms.note.api.module.files.FilesMapper">
+    <select id="search" parameterType="org.open.lang.ms.note.api.module.files.FilesCondition" resultType="org.open.lang.ms.note.api.module.files.Files">
+        select *
+        from "files" t
+        where 1 = 1
+        <if test="catalogs != null and !catalogs.isEmpty()"  >
+            and exists( select cr."id"
+            from "files_catalog_rel" cr
+            where t."id" = cr.file_id
+            and cr.file_catalog_id in
+            <foreach collection="catalogs" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+            )
+        </if>
+        <if test="tags != null and !tags.isEmpty()"  >
+            and exists( select tr."id"
+            from "files_tag_rel" tr
+            where t."id" = tr.file_id
+            and tr.file_tag_id in
+            <foreach collection="tags" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+            )
+        </if>
+        order by t."create_time" desc
+        LIMIT #{pageSize} OFFSET #{ offset }
+    </select>
+
+
+
+</mapper>

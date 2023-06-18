@@ -1,13 +1,19 @@
 package org.open.lang.ms.note.base;
 
 import org.soul.ability.web.springmvc.consts.CommonRouter;
+import org.soul.base.bean.IEntity;
+import org.soul.base.bean.Pair;
+import org.soul.base.lang.GenericTool;
+import org.soul.base.query.result.Paging;
+import org.soul.base.query.result.PagingResult;
 import org.soul.base.support.model.common.BaseDeleteModel;
-import org.soul.base.support.model.common.BaseIdModel;
+import org.soul.base.support.model.common.BasePagingModel;
 import org.soul.base.support.service.IBaseCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -15,7 +21,7 @@ import java.util.List;
 
 public class BaseCrudController<PK,
         B extends IBaseCrudService<M, PK>,
-        M extends BaseIdModel<PK>> {
+        M extends IEntity<PK>> {
 
     @Autowired
     protected B biz;

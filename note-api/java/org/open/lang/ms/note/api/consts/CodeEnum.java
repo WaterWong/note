@@ -8,6 +8,10 @@ public enum CodeEnum implements IErrorCode {
 
     USER_EXIST("10001","user exists"),
     USER_NOT_EXIST("10002","user not exists"),
+
+    MY_AVATAR_FAIL("20001","avator upload fail"),
+
+
     ;
 
     private String code;

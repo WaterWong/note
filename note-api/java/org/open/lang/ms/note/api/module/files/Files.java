@@ -32,6 +32,6 @@ public class Files extends BaseEntity<String> {
     private List<FilesTagRel> tags;
 
     @TableField(exist = false)
-    private List<FilesCatalogRel> catalogs;
+    private FilesCatalogRel catalogs;
 
 }

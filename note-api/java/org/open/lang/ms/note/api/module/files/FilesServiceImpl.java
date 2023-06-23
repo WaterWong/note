@@ -27,9 +27,9 @@ public class FilesServiceImpl extends BaseCrudService<Files, FilesMapper, String
             files.getTags().stream().forEach(t -> t.setFileId(files.getId()));
             filesTagRelMapper.batchInsert(files.getTags());
         }
-        if (CollectionTool.isNotEmpty(files.getTags())) {
-            files.getCatalogs().stream().forEach(t -> t.setFileId(files.getId()));
-            filesCatalogRelMapper.batchInsert(files.getCatalogs());
+        if (files.getCatalogs() != null) {
+            files.getCatalogs().setFileId(files.getId());
+            filesCatalogRelMapper.insert(files.getCatalogs());
         }
         return rs;
     }

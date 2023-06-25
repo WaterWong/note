@@ -4,7 +4,7 @@ soul:
       spring:
         mode: local                             #local: 本地单机模式; distributed: 分布式模
         session:
-          creation-policy: STATELESS
+          creation-policy:  IF_REQUIRED         # STATELESS: 导致每个请求都会获取sysUser
           expired-url: "/passport/expired.html" #过期处理URL(forward)
           concurrency-control:
             enable: false

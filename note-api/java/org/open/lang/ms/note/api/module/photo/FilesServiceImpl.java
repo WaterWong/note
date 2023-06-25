@@ -1,7 +1,7 @@
-package org.open.lang.ms.note.api.module.files;
+package org.open.lang.ms.note.api.module.photo;
 
-import org.open.lang.ms.note.api.module.files.catalogrel.FilesCatalogRelMapper;
-import org.open.lang.ms.note.api.module.files.tagrel.FilesTagRelMapper;
+import org.open.lang.ms.note.api.module.photo.catalogrel.FilesCatalogRelMapper;
+import org.open.lang.ms.note.api.module.photo.tagrel.FilesTagRelMapper;
 import org.soul.ability.data.rdb.mybatis.service.BaseCrudService;
 import org.soul.base.lang.collections.CollectionTool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +21,15 @@ public class FilesServiceImpl extends BaseCrudService<Files, FilesMapper, String
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public int insert(Files files) {
-        int rs = this.mapper.insert(files);
-        if (CollectionTool.isNotEmpty(files.getTags())) {
-            files.getTags().stream().forEach(t -> t.setFileId(files.getId()));
-            filesTagRelMapper.batchInsert(files.getTags());
+    public int insert(Files photo) {
+        int rs = this.mapper.insert(photo);
+        if (CollectionTool.isNotEmpty(photo.getTags())) {
+            photo.getTags().stream().forEach(t -> t.setFileId(photo.getId()));
+            filesTagRelMapper.batchInsert(photo.getTags());
         }
-        if (files.getCatalogs() != null) {
-            files.getCatalogs().setFileId(files.getId());
-            filesCatalogRelMapper.insert(files.getCatalogs());
+        if (photo.getCatalogs() != null) {
+            photo.getCatalogs().setFileId(photo.getId());
+            filesCatalogRelMapper.insert(photo.getCatalogs());
         }
         return rs;
     }

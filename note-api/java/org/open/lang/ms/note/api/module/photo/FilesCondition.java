@@ -1,10 +1,9 @@
-package org.open.lang.ms.note.api.module.files;
+package org.open.lang.ms.note.api.module.photo;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.soul.base.support.model.common.BasePagingModel;
 
-import java.util.Date;
 import java.util.List;
 
 @Getter

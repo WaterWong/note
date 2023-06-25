@@ -1,4 +1,4 @@
-package org.open.lang.ms.note.api.module.files.catalogrel;
+package org.open.lang.ms.note.api.module.photo.catalogrel;
 
 import org.soul.base.support.service.IBaseCrudService;
 

@@ -1,4 +1,4 @@
-package org.open.lang.ms.note.api.module.files.catalogrel;
+package org.open.lang.ms.note.api.module.photo.catalogrel;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
 import org.soul.base.bean.IEntity;
-import org.soul.base.support.model.common.BaseIdModel;
 
 @Getter
 @Setter

@@ -1,4 +1,4 @@
-package org.open.lang.ms.note.api.module.files.tag;
+package org.open.lang.ms.note.api.module.photo.tag;
 
 import org.soul.base.support.service.IBaseCrudService;
 

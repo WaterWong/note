@@ -1,8 +1,6 @@
-package org.open.lang.ms.note.api.module.files.catalog;
+package org.open.lang.ms.note.api.module.photo.catalog;
 
 import io.swagger.annotations.Api;
-import org.open.lang.ms.note.api.module.files.catalogrel.FilesCatalogRel;
-import org.open.lang.ms.note.api.module.files.tag.FilesTag;
 import org.open.lang.ms.note.base.BaseCrudController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +12,7 @@ import java.util.List;
  * 文件分类
  */
 @RestController
-@RequestMapping(value = "/files/catalog")
+@RequestMapping(value = "/photo/catalog")
 @Api(tags = "文件分类")
 public class FilesCatalogController extends BaseCrudController<String, FilesCatalogService, FilesCatalog> {
 

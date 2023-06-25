@@ -1,4 +1,4 @@
-package org.open.lang.ms.note.api.module.files;
+package org.open.lang.ms.note.api.module.photo.tag;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.open.lang.ms.note.api.module.items.item.ItemRecordResult;
@@ -9,8 +9,7 @@ import java.util.List;
 
 @Repository
 @Mapper
-public interface FilesMapper extends IBaseCrudMapper<Files, String> {
+public interface FilesTagMapper extends IBaseCrudMapper<FilesTag, String> {
 
-    List<Files> search(FilesCondition filesCondition);
-
+    List<ItemRecordResult> recent(int size);
 }

@@ -4,4 +4,4 @@ fserver:
     location: ${user.home}/h2/data/files
 
     #文件服务器 - 外网根URL
-    public-endpoint: http://localhost:8080/note-api/files
+    public-endpoint: http://localhost:6060/note-api/files

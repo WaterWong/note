@@ -1,4 +1,4 @@
-package org.open.lang.ms.note.api.module.files.tagrel;
+package org.open.lang.ms.note.api.module.photo.tagrel;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

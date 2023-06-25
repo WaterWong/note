@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="org.open.lang.ms.note.api.module.files.FilesMapper">
-    <select id="search" parameterType="org.open.lang.ms.note.api.module.files.FilesCondition" resultType="org.open.lang.ms.note.api.module.files.Files">
+<mapper namespace="org.open.lang.ms.note.api.module.photo.FilesMapper">
+    <select id="search" parameterType="org.open.lang.ms.note.api.module.photo.FilesCondition" resultType="org.open.lang.ms.note.api.module.photo.Files">
         select *
         from "files" t
         where 1 = 1

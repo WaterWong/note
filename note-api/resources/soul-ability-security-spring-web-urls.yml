@@ -18,6 +18,7 @@ soul:
               - /swagger-v2/api-docs.html
               - /actuator/**
               - /errors/**
+              - /files/**       # uploaded photo root folder
 
             #忽略的URL:通过Security过滤器时忽略
             ignore-urls-in-security:

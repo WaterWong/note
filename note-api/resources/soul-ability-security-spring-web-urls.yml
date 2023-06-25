@@ -9,7 +9,7 @@ soul:
             #安全的URL:通过Security过滤器
             security-urls:
               authenticated:
-                - /item/**
+                - /**
 
             #忽略的URL:不会经过Security过滤器
             ignore-urls:

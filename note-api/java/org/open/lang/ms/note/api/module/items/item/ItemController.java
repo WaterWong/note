@@ -50,5 +50,9 @@ public class ItemController {
         return itemService.fullSearch(sysUser.getId(),word,type);
     }
 
+    @RequestMapping(value = {"/understood"}, method = {RequestMethod.POST})
+    public boolean understood(@RequestBody ItemEditModel model) {
+        return this.itemService.understood(model.getId());
+    }
 
 }

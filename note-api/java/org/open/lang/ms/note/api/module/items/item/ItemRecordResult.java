@@ -35,7 +35,14 @@ public class ItemRecordResult implements IJsonResult {
     @ApiModelProperty(value = "")
     private Date createTime;
 
+    /**
+     * 是否:收藏
+     */
     private boolean isFavorite = false;
 
+    /**
+     * 是否:懂了(掌握了,免测试)
+     */
+    private Boolean isUnderstood;
 
 }

@@ -16,4 +16,6 @@ public interface ItemService extends IBaseCrudService<Item, String> {
      * @return
      */
     List<Item> fullSearch(String createUserId, String word,String type);
+
+    boolean understood(String itemId);
 }

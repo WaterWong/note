@@ -24,6 +24,11 @@ public class ItemEditModel extends BaseEditModel<String> {
     private String chinese;
 
     /**
+     * 是否:懂了(掌握了,免测试)
+     */
+    private Boolean isUnderstood;
+
+    /**
      * 读音(位置)
      */
     private int soundPosition;

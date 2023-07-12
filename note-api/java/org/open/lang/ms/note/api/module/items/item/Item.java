@@ -33,6 +33,8 @@ public class Item extends BaseEntity<String> {
      */
     public final static String FIELD_CHINESE = "chinese";
 
+    public final static String FIELD_IS_UNDERSTOOD= "isUnderstood";
+
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
 
@@ -57,5 +59,10 @@ public class Item extends BaseEntity<String> {
      * 中文
      */
     private String chinese;
+
+    /**
+     * 是否:懂了(掌握了,免测试)
+     */
+    private Boolean isUnderstood;
 
 }

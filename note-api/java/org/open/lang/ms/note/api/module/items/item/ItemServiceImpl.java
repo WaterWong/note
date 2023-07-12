@@ -8,12 +8,12 @@ import org.open.lang.ms.note.api.module.items.log.ItemLogType;
 import org.soul.ability.data.rdb.mybatis.entity.BaseEntity;
 import org.soul.ability.data.rdb.mybatis.service.BaseCrudService;
 import org.soul.base.bean.BeanTool;
+import org.soul.base.lang.BooleanTool;
 import org.soul.base.lang.collections.CollectionTool;
 import org.soul.base.lang.string.StringTool;
 import org.soul.base.query.Criteria;
 import org.soul.base.query.enums.OperatorEnum;
 import org.soul.base.query.sort.Order;
-import org.soul.base.support.model.common.BaseAddModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -112,4 +112,16 @@ public class ItemServiceImpl extends BaseCrudService<Item, ItemMapper, String> i
         List<Item> items = mapper.pagingSearch(criteria, 1, 9, Order.desc(BaseEntity.FIELD_CREATE_TIME)).getKey();
         return items;
     }
+
+    @Override
+    public boolean understood(String itemId) {
+        Item item = mapper.get(itemId);
+        if (item != null) {
+            boolean is = BooleanTool.toBoolean(item.getIsUnderstood());
+            item.setIsUnderstood(!is);
+            return mapper.updateOnly(item,Item.FIELD_IS_UNDERSTOOD);
+        }
+        return true;
+    }
+
 }

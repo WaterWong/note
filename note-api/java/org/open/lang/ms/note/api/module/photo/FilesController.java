@@ -1,7 +1,9 @@
 package org.open.lang.ms.note.api.module.photo;
 
 import io.swagger.annotations.Api;
+import org.open.lang.ms.note.api.module.passport.UserTool;
 import org.open.lang.ms.note.base.BaseCrudController;
+import org.soul.ms.user.common.vo.login.UserInfoModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +24,8 @@ public class FilesController extends BaseCrudController<String, FilesService, Fi
 
     @RequestMapping("/list")
     List<Files> list( @RequestBody  FilesCondition filesCondition) {
+        UserInfoModel sysUser = UserTool.currentUser();
+        filesCondition.setCreateUserId(sysUser.getId());
         return biz.search(filesCondition);
     }
 }

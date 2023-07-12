@@ -18,4 +18,6 @@ public class FilesCondition extends BasePagingModel {
       return Long.valueOf((pageNumber - 1) * pageSize);
    }
 
+   private String createUserId;
+
 }

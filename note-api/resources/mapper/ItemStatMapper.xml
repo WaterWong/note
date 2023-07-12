@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.open.lang.ms.note.api.module.items.stat.ItemStatMapper">
+
+    <select id="statByDateRange" parameterType="org.open.lang.ms.note.api.module.items.stat.ItemStatCondition"
+            resultType="org.open.lang.ms.note.api.module.items.stat.ItemStatDateRange">
+        select
+            to_char(create_time AT TIME ZONE #{timezone}, 'yyyy-MM-dd') as date,
+            type,
+            count(1) as count
+        from item
+        where 1 = 1
+            and create_user_id = #{createUserId}
+        group by date,type
+        order by date desc
+        limit #{limit}
+        ;
+    </select>
+
+    <select id="statByType" parameterType="org.open.lang.ms.note.api.module.items.stat.ItemStatCondition"
+            resultType="org.open.lang.ms.note.api.module.items.stat.ItemStatType">
+        select
+            type,
+            count(1) as count
+        from item
+        where 1 = 1
+          and create_user_id = #{createUserId}
+        group by type
+        limit #{limit}
+        ;
+    </select>
+
+
+
+</mapper>

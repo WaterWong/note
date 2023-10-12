@@ -13,9 +13,12 @@ soul:
 
             #忽略的URL:不会经过Security过滤器
             ignore-urls:
+              - /favicon.ico
               - /images/favicon.ico
-              - /v2/api-docs.html
-              - /swagger-v2/api-docs.html
+              - /v3/api-docs/**
+              - /swagger-resources/**
+              - /doc.html
+              - /webjars/**
               - /actuator/**
               - /errors/**
               - /files/**       # uploaded photo root folder

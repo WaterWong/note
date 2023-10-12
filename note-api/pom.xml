@@ -5,18 +5,23 @@
 	<parent>
 		<groupId>org.open.lang</groupId>
 		<artifactId>note</artifactId>
-		<version>1.0.0.0-SNAPSHOT</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 	<packaging>jar</packaging>
 	<name>note-api</name>
 	<artifactId>note-api</artifactId>
 	<properties>
 		<spring-boot.version>2.7.2</spring-boot.version>
-		<!-- spring boot as parent: worked-->
 		<start-class>org.open.lang.ms.note.api.NoteApiApplication</start-class>
 	</properties>
 
 	<dependencies>
+		<!--region web layer -->
+		<dependency>
+			<groupId>org.soul</groupId>
+			<artifactId>soul-ability-security-spring-web</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.soul</groupId>
 			<artifactId>soul-ability-web-springmvc</artifactId>
@@ -24,19 +29,20 @@
 
 		<dependency>
 			<groupId>org.soul</groupId>
-			<artifactId>soul-ability-security-spring-web</artifactId>
+			<artifactId>soul-ms-user-login</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>io.swagger</groupId>
+					<artifactId>swagger-annotations</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		<!--endregion web layer -->
 
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>compile</scope>
-		</dependency>
-
-		<!-- service start -->
+		<!--region service start -->
 		<dependency>
 			<groupId>org.soul</groupId>
-			<artifactId>soul-ability-data-rdb-mybatis</artifactId>
+			<artifactId>soul-ability-data-rdb-flyway</artifactId>
 		</dependency>
 
 		<dependency>
@@ -44,18 +50,40 @@
 			<artifactId>h2</artifactId>
 		</dependency>
 
-		<!--flyway依赖-->
 		<dependency>
 			<groupId>org.soul</groupId>
-			<artifactId>soul-ability-data-rdb-flyway</artifactId>
+			<artifactId>soul-ability-data-rdb-mybatis</artifactId>
 		</dependency>
-		<!--flyway依赖 end-->
-		<!-- service end-->
+		<!--endregion -->
 
 		<dependency>
 			<groupId>org.soul</groupId>
-			<artifactId>soul-ability-web-swagger</artifactId>
+			<artifactId>soul-ability-security-spring-local</artifactId>
+		</dependency>
+
+		<!--region file system-->
+		<dependency>
+			<groupId>org.soul</groupId>
+			<artifactId>soul-ability-file-local</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.soul</groupId>
+			<artifactId>soul-ms-fserver-api-view</artifactId>
+		</dependency>
+		<!--endregion -->
+
+		<!--region tools-->
+		<dependency>
+			<groupId>org.soul</groupId>
+			<artifactId>soul-ability-web-swagger3</artifactId>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
@@ -66,35 +94,15 @@
 
 		<dependency>
 			<groupId>org.soul</groupId>
-			<artifactId>soul-ms-user-login</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.soul</groupId>
-			<artifactId>soul-ability-security-spring-local</artifactId>
-		</dependency>
-
-		<!-- 本地文件系统-->
-		<dependency>
-			<groupId>org.soul</groupId>
-			<artifactId>soul-ability-file-local</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.soul</groupId>
-			<artifactId>soul-ms-fserver-api-view</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.soul</groupId>
 			<artifactId>soul-tools-codegen</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<!--endregion-->
 
 	</dependencies>
 

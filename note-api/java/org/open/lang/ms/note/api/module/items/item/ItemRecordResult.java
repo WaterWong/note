@@ -1,7 +1,7 @@
 package org.open.lang.ms.note.api.module.items.item;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.soul.base.support.result.IJsonResult;
@@ -12,27 +12,27 @@ import java.util.*;
  */
 @Setter
 @Getter
-@ApiModel(value = "詞條列表行数据")
+@Schema(description = "詞條列表行数据")
 public class ItemRecordResult implements IJsonResult {
-    @ApiModelProperty(value = "")
+    @Schema(description = "")
     private String id;
-    @ApiModelProperty(value = "詞條類型: 1=單詞, 2=句子")
+    @Schema(description = "詞條類型: 1=單詞, 2=句子")
     private String type;
     /**
      * 读音(位置)
      */
     private int soundPosition;
-    @ApiModelProperty(value = "日文")
+    @Schema(description = "日文")
     private String japanese;
-    @ApiModelProperty(value = "假名")
+    @Schema(description = "假名")
     private String hiragana;
-    @ApiModelProperty(value = "中文")
+    @Schema(description = "中文")
     private String chinese;
-    @ApiModelProperty(value = "")
+    @Schema(description = "")
     private String createUserId;
-    @ApiModelProperty(value = "")
+    @Schema(description = "")
     private String createUser;
-    @ApiModelProperty(value = "")
+    @Schema(description = "")
     private Date createTime;
 
     /**

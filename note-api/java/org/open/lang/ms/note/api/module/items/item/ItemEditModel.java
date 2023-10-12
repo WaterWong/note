@@ -1,6 +1,6 @@
 package org.open.lang.ms.note.api.module.items.item;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.soul.base.support.model.common.BaseEditModel;
@@ -10,17 +10,17 @@ import org.soul.base.support.model.common.BaseEditModel;
  */
 @Getter
 @Setter
-@ApiModel(value = "詞條编辑")
+@Schema(description = "詞條编辑")
 public class ItemEditModel extends BaseEditModel<String> {
-    @ApiModelProperty(value = "")
+    @Schema(description = "")
     private String id;
-    @ApiModelProperty(value = "詞條類型: 1=單詞, 2=句子")
+    @Schema(description = "詞條類型: 1=單詞, 2=句子")
     private String type;
-    @ApiModelProperty(value = "日文")
+    @Schema(description = "日文")
     private String japanese;
-    @ApiModelProperty(value = "假名")
+    @Schema(description = "假名")
     private String hiragana;
-    @ApiModelProperty(value = "中文")
+    @Schema(description = "中文")
     private String chinese;
 
     /**

@@ -1,6 +1,6 @@
 package org.open.lang.ms.note.api.module.photo;
 
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.open.lang.ms.note.api.module.passport.UserTool;
 import org.open.lang.ms.note.base.BaseCrudController;
 import org.soul.ms.user.common.vo.login.UserInfoModel;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/photo")
-@Api(tags = "文件")
+@Tag(name = "文件")
 public class FilesController extends BaseCrudController<String, FilesService, Files> {
 
     //@Override

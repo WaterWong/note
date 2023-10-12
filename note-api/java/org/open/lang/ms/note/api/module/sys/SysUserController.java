@@ -1,5 +1,8 @@
 package org.open.lang.ms.note.api.module.sys;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 import org.open.lang.ms.note.api.module.sys.vo.SignUpVo;
 import org.open.lang.ms.note.api.module.user.UserService;
@@ -11,6 +14,7 @@ import org.soul.ms.user.provider.entity.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "用户管理")
 @RestController
 @RequestMapping("/user")
 public class SysUserController {
@@ -21,6 +25,12 @@ public class SysUserController {
     @Autowired
     private JwtTokenGenerator jwtTokenGenerator;
 
+    @Operation(summary = "",
+            description = "",
+            parameters = {
+                @Parameter(name = "登录信息",description = "用户名,密码等")
+            }
+    )
     @PostMapping("/signUp")
     public SignUpVo signUp(@RequestBody SysUser sysUser) {
         SysUser user = userService.signUp(sysUser);

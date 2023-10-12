@@ -1,6 +1,6 @@
 package org.open.lang.ms.note.api.module.items.favorite;
 
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.open.lang.ms.note.api.module.passport.UserTool;
 import org.soul.base.bean.BeanTool;
 import org.soul.base.lang.collections.CollectionTool;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/item/favorite")
-@Api(tags = "視圖:詞條-收藏夾 ")
+@Tag(name = "視圖:詞條-收藏夾 ")
 public class ItemFavoriteController {
 
     @Autowired

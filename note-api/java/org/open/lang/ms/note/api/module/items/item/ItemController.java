@@ -1,6 +1,6 @@
 package org.open.lang.ms.note.api.module.items.item;
 
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.open.lang.ms.note.api.module.passport.UserTool;
 import org.soul.base.lang.collections.ListTool;
 import org.soul.base.lang.string.StringTool;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/item")
-@Api(tags = "詞條")
+@Tag(name = "詞條")
 public class ItemController {
 
     @Autowired

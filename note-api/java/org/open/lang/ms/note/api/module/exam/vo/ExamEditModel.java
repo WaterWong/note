@@ -1,16 +1,16 @@
 package org.open.lang.ms.note.api.module.exam.vo;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import org.soul.base.support.model.common.BaseEditModel;
 
 /**
  * 编辑的模型vo
  */
-@ApiModel(value = "测验编辑")
+@Schema(description = "测验编辑")
 public class ExamEditModel extends BaseEditModel<String> {
-    @ApiModelProperty(value = "")
+    @Schema(description = "")
     private String id;
-    @ApiModelProperty(value = "测验标题")
+    @Schema(description = "测验标题")
     private String name;
 
     public String getId() {

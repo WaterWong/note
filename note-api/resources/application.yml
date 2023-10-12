@@ -16,7 +16,7 @@ soul:
           exp: 604800  # 7 days
       spring:
         jwt:
-          enable: true
+#          enable: true
 
   ms:
     fserver:
@@ -30,3 +30,9 @@ soul:
 #mybatis-plus:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+springdoc:
+  group-configs:
+    - group: node
+      display-name: node book doc
+      packages-to-scan: org.open.lang.ms.note.api.module

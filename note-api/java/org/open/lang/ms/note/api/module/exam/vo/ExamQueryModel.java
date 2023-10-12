@@ -1,7 +1,7 @@
 package org.open.lang.ms.note.api.module.exam.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import org.soul.base.bean.validation.constraint.annotaions.Compare;
 import org.soul.base.support.logic.LogicOperatorEnum;
 import org.soul.base.support.model.common.BasePagingModel;
@@ -10,17 +10,17 @@ import java.util.*;
 /**
  * 分页查询对象
  */
-@ApiModel(value = "测验列表查询对象")
+@Schema(description = "测验列表查询对象")
 public class ExamQueryModel extends BasePagingModel {
-    @ApiModelProperty(value = "")
+    @Schema(description = "")
     private String id;
-    @ApiModelProperty(value = "")
+    @Schema(description = "")
     private String createUserId;
-    @ApiModelProperty(value = "")
+    @Schema(description = "")
     private Date createTime;
-    @ApiModelProperty(value = " 开始时间")
+    @Schema(description = " 开始时间")
     private Date createTimeStart;
-    @ApiModelProperty(value = " 结束时间")
+    @Schema(description = " 结束时间")
     private Date createTimeEnd;
 
 

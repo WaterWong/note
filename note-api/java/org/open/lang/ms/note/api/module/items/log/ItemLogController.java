@@ -1,6 +1,6 @@
 package org.open.lang.ms.note.api.module.items.log;
 
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.open.lang.ms.note.api.module.passport.UserTool;
 import org.soul.base.bean.BeanTool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping(value = "/item/log")
-@Api(tags = "詞條-日誌 ")
+@Tag(name = "詞條-日誌 ")
 public class ItemLogController {
 
     @Autowired

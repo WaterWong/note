@@ -1,22 +1,22 @@
 package org.open.lang.ms.note.api.module.items.item;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import org.soul.base.support.model.common.BasePagingModel;
 
 /**
  * 分页查询对象
  */
-@ApiModel(value = "詞條列表查询对象")
+@Schema(description = "詞條列表查询对象")
 public class ItemQueryModel extends BasePagingModel {
 
-    @ApiModelProperty(value = "ID")
+    @Schema(description = "ID")
     private String id;
-    @ApiModelProperty(value = "日文")
+    @Schema(description = "日文")
     private String japanese;
-    @ApiModelProperty(value = "平假名")
+    @Schema(description = "平假名")
     private String hiragana;
-    @ApiModelProperty(value = "中文")
+    @Schema(description = "中文")
     private String chinese;
 
     public String getId() {

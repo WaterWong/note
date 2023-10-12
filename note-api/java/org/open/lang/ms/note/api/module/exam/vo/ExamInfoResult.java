@@ -1,22 +1,22 @@
 package org.open.lang.ms.note.api.module.exam.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import org.soul.base.support.result.IJsonResult;
 import java.util.*;
 
 /**
  * 详情显示的数据内容
  */
-@ApiModel(value = "测验详情数据")
+@Schema(description = "测验详情数据")
 public class ExamInfoResult implements IJsonResult {
-    @ApiModelProperty(value = "")
+    @Schema(description = "")
     private String id;
-    @ApiModelProperty(value = "测验标题")
+    @Schema(description = "测验标题")
     private String name;
-    @ApiModelProperty(value = "")
+    @Schema(description = "")
     private String createUserId;
-    @ApiModelProperty(value = "")
+    @Schema(description = "")
     private Date createTime;
 
     public String getId() {

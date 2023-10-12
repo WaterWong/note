@@ -1,6 +1,6 @@
 package org.open.lang.ms.note.api.module.my;
 
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.open.lang.ms.note.api.consts.CodeEnum;
 import org.open.lang.ms.note.api.module.passport.UserTool;
 import org.soul.base.web.WebResult;
@@ -20,7 +20,7 @@ import java.util.Date;
  */
 @RestController
 @RequestMapping(value = "/my")
-@Api(tags = "我的")
+@Tag(name = "我的")
 public class MyController {
 
     @Autowired

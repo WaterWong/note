@@ -1,5 +1,8 @@
 package org.open.lang.ms.note.api.module.exam;
 
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.open.lang.ms.note.api.module.exam.log.ExamLog;
 import org.open.lang.ms.note.api.module.exam.log.IExamLogService;
 import org.open.lang.ms.note.api.module.exam.vo.ExamInfoResult;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Tag(name = "測驗接口")
 @RestController
 @RequestMapping("/exam")
 public class ExamController {

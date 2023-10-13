@@ -1,13 +1,15 @@
 package org.open.lang.ms.note.api.module.items.item;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.open.lang.ms.note.api.module.CommonErrorCodeEnum;
 import org.open.lang.ms.note.api.module.passport.UserTool;
+import org.soul.base.exception.ServiceException;
 import org.soul.base.lang.collections.ListTool;
 import org.soul.base.lang.string.StringTool;
 import org.soul.ms.user.common.vo.login.UserInfoModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,7 +28,18 @@ public class ItemController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ItemEditModel save(@Valid @RequestBody ItemEditModel addVo) {
-        return itemService.saveOrUpdate(addVo);
+        try {
+            return itemService.saveOrUpdate(addVo);
+        } catch (DuplicateKeyException e) {
+            throw new ServiceException(CommonErrorCodeEnum.DATA_EXIST,e);
+
+        }
+    }
+
+    @RequestMapping(value = "/oneWord", method = RequestMethod.GET)
+    public ItemRecordResult recent( @RequestParam(required = true) String word) {
+        UserInfoModel sysUser = UserTool.currentUser();
+        return this.itemService.oneWord(word,sysUser.getId());
     }
 
     @RequestMapping(value = "/recent", method = RequestMethod.GET)

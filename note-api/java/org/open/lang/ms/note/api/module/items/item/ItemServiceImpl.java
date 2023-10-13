@@ -1,5 +1,6 @@
 package org.open.lang.ms.note.api.module.items.item;
 
+import org.jetbrains.annotations.NotNull;
 import org.open.lang.ms.note.api.module.items.favorite.ItemFavorite;
 import org.open.lang.ms.note.api.module.items.favorite.ItemFavoriteService;
 import org.open.lang.ms.note.api.module.items.log.ItemLog;
@@ -8,7 +9,6 @@ import org.open.lang.ms.note.api.module.items.log.ItemLogType;
 import org.soul.ability.data.rdb.mybatis.entity.BaseEntity;
 import org.soul.ability.data.rdb.mybatis.service.BaseCrudService;
 import org.soul.base.bean.BeanTool;
-import org.soul.base.exception.ServiceException;
 import org.soul.base.lang.BooleanTool;
 import org.soul.base.lang.collections.CollectionTool;
 import org.soul.base.lang.string.StringTool;
@@ -37,18 +37,29 @@ public class ItemServiceImpl extends BaseCrudService<Item, ItemMapper, String> i
     private ItemLogService itemLogService;
 
     @Override
+    public ItemRecordResult oneWord(String word, String createUserId) {
+        Criteria criteria =
+                Criteria.and(
+                        Criteria.add(BaseEntity.FIELD_CREATE_USER_ID, OperatorEnum.EQ, createUserId),
+                        Criteria.add(Item.FIELD_JAPANESE, OperatorEnum.EQ, word)
+                );
+        List<Item> items = mapper.search(criteria);
+        List<ItemRecordResult> results = toVo(items);
+        fillFavorite(createUserId, results);
+        return results.get(0);
+    }
+
+
+    @Override
     public List<ItemRecordResult> recent(int pageNo,int pageSize, String createUserId) {
-        Criteria criteria = Criteria
-                .add(BaseEntity.FIELD_CREATE_USER_ID, OperatorEnum.EQ, createUserId);
-
+        Criteria criteria = Criteria .add(BaseEntity.FIELD_CREATE_USER_ID, OperatorEnum.EQ, createUserId);
         List<Item> items = mapper.pagingSearch(criteria, pageNo, pageSize, Order.desc(BaseEntity.FIELD_CREATE_TIME)).getKey();
+        List<ItemRecordResult> results = toVo(items);
+        fillFavorite(createUserId, results);
+        return results;
+    }
 
-        List<ItemRecordResult> results = items.stream()
-                .map(a -> {
-                    return BeanTool.copyProperties(a, new ItemRecordResult());
-                })
-                .collect(Collectors.toList());
-
+    private void fillFavorite(String createUserId, List<ItemRecordResult> results) {
         if (CollectionTool.isNotEmpty(results)) {
             List<String> ids = results.stream()
                     .map( item -> item.getId())
@@ -57,12 +68,21 @@ public class ItemServiceImpl extends BaseCrudService<Item, ItemMapper, String> i
             //search the one favorite records
             List<ItemFavorite> byIds = itemFavoriteService.searchByItemIdByCreateUser(ids, createUserId);
             Set<String> favoriteIds = byIds.stream().map(i -> i.getItemId()).collect(Collectors.toSet());
-            results.stream().forEach( rs -> {
+            results.stream().forEach(rs -> {
                 if (favoriteIds.contains(rs.getId())) {
                     rs.setFavorite(true);
                 }
             });
         }
+    }
+
+    @NotNull
+    private static List<ItemRecordResult> toVo(List<Item> items) {
+        List<ItemRecordResult> results = items.stream()
+                .map(a -> {
+                    return BeanTool.copyProperties(a, new ItemRecordResult());
+                })
+                .collect(Collectors.toList());
         return results;
     }
 

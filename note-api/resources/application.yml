@@ -16,7 +16,7 @@ soul:
           exp: 604800  # 7 days
       spring:
         jwt:
-#          enable: true
+          enable: true
 
   ms:
     fserver:

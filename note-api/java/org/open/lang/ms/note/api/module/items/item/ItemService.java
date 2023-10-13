@@ -15,7 +15,15 @@ public interface ItemService extends IBaseCrudService<Item, String> {
      * @param word
      * @return
      */
+    @Deprecated(since = "1.0.1")
     List<Item> fullSearch(String createUserId, String word,String type);
+
+    /**
+     * 按条件查询
+     * @param condition
+     * @return
+     */
+    List<Item> searchByCondition(ItemSearchCondition condition);
 
     boolean understood(String itemId);
 }

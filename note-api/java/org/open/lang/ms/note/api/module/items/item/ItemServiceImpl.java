@@ -8,6 +8,7 @@ import org.open.lang.ms.note.api.module.items.log.ItemLogType;
 import org.soul.ability.data.rdb.mybatis.entity.BaseEntity;
 import org.soul.ability.data.rdb.mybatis.service.BaseCrudService;
 import org.soul.base.bean.BeanTool;
+import org.soul.base.exception.ServiceException;
 import org.soul.base.lang.BooleanTool;
 import org.soul.base.lang.collections.CollectionTool;
 import org.soul.base.lang.string.StringTool;
@@ -22,6 +23,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * @author Roger
+ *
+ */
 @Service
 public class ItemServiceImpl extends BaseCrudService<Item, ItemMapper, String> implements ItemService {
 
@@ -92,26 +97,51 @@ public class ItemServiceImpl extends BaseCrudService<Item, ItemMapper, String> i
         return addVo;
     }
 
+    @Deprecated(since = "1.0.1")
     @Override
     public List<Item> fullSearch(String createUserId, String word,String type) {
+        return fullSearch(createUserId,word,type,ItemFieldRange.ALL);
+    }
+
+    @Override
+    public List<Item> searchByCondition(ItemSearchCondition condition) {
+        return fullSearch(
+                condition.getCreateUserId(),
+                condition.getWord(),
+                condition.getType(),
+                condition.getFieldRange()
+        );
+    }
+
+    private List<Item> fullSearch(String createUserId, String word,String type,ItemFieldRange fieldRange) {
+
+        //词条内容查询字段:字段名条件
+        Criteria fields = null;
+        switch (fieldRange) {
+            case JAPANESE -> fields = Criteria.add(Item.FIELD_JAPANESE, OperatorEnum.LIKE, word);
+            case HIRAGANA -> fields = Criteria.add(Item.FIELD_HIRAGANA, OperatorEnum.LIKE, word);
+            case CHINESE  -> fields = Criteria.add(Item.FIELD_CHINESE, OperatorEnum.LIKE, word);
+            case ALL -> {
+                fields = Criteria.or(
+                        Criteria.add(Item.FIELD_JAPANESE, OperatorEnum.LIKE, word),
+                        Criteria.add(Item.FIELD_HIRAGANA, OperatorEnum.LIKE, word),
+                        Criteria.add(Item.FIELD_CHINESE, OperatorEnum.LIKE, word)
+
+                );
+            }
+        }
         Criteria criteria = Criteria
                 .add(BaseEntity.FIELD_CREATE_USER_ID, OperatorEnum.EQ, createUserId)
-                .addAnd(
-                        Criteria.or(
-                                Criteria.add(Item.FIELD_JAPANESE,OperatorEnum.LIKE, word),
-                                Criteria.add(Item.FIELD_HIRAGANA,OperatorEnum.LIKE, word),
-                                Criteria.add(Item.FIELD_CHINESE,OperatorEnum.LIKE, word)
-
-                        )
-                )
+                .addAnd( fields )
                 .addAnd(
                         Criteria.add(Item.FIELD_TYPE,OperatorEnum.EQ, type)
                 )
                 ;
 
-        List<Item> items = mapper.pagingSearch(criteria, 1, 9, Order.desc(BaseEntity.FIELD_CREATE_TIME)).getKey();
+        List<Item> items = mapper.pagingSearch(criteria, 1, 20, Order.desc(BaseEntity.FIELD_CREATE_TIME)).getKey();
         return items;
     }
+
 
     @Override
     public boolean understood(String itemId) {

@@ -1,5 +1,7 @@
 package org.open.lang.ms.note.api.module.items.item;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.open.lang.ms.note.api.module.passport.UserTool;
 import org.soul.base.lang.collections.ListTool;
@@ -41,6 +43,7 @@ public class ItemController {
         return this.itemService.deleteById(model.getId());
     }
 
+    @Deprecated(since = "1.0.1")
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public List<Item> search(@RequestParam String type,@RequestParam String word) {
         if (StringTool.isBlank(word)) {
@@ -49,6 +52,19 @@ public class ItemController {
         UserInfoModel sysUser = UserTool.currentUser();
         return itemService.fullSearch(sysUser.getId(),word,type);
     }
+
+    @Operation(description = "按条件查询" )
+    @PostMapping(value = "/search2")
+    public List<Item> search(@RequestBody ItemSearchCondition condition) {
+        if (StringTool.isBlank(condition.getWord())) {
+            return ListTool.newArrayList();
+        }
+        UserInfoModel sysUser = UserTool.currentUser();
+        condition.setCreateUserId(sysUser.getId());
+        return itemService.searchByCondition(condition);
+    }
+
+
 
     @RequestMapping(value = {"/understood"}, method = {RequestMethod.POST})
     public boolean understood(@RequestBody ItemEditModel model) {

@@ -1,6 +1,6 @@
 package org.open.lang.ms.note.api.module.items.item;
 
-import org.jetbrains.annotations.NotNull;
+import jakarta.validation.constraints.NotNull;
 import org.open.lang.ms.note.api.module.items.favorite.ItemFavorite;
 import org.open.lang.ms.note.api.module.items.favorite.ItemFavoriteService;
 import org.open.lang.ms.note.api.module.items.log.ItemLog;

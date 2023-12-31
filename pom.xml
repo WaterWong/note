@@ -18,6 +18,8 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
 
+        <spring-boot.version>3.2.1</spring-boot.version>
+
     </properties>
 
     <repositories>

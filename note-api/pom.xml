@@ -11,7 +11,6 @@
 	<name>note-api</name>
 	<artifactId>note-api</artifactId>
 	<properties>
-		<spring-boot.version>2.7.2</spring-boot.version>
 		<start-class>org.open.lang.ms.note.api.NoteApiApplication</start-class>
 	</properties>
 
@@ -129,7 +128,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring-boot.version}</version>
 				<configuration>
-					<mainClass>org.open.lang.ms.note.api.NoteApiApplication</mainClass>
+					<mainClass>${start-class}</mainClass>
 				</configuration>
 				<executions>
 					<execution>

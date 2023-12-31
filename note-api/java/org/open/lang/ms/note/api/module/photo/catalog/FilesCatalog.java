@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.soul.base.bean.IEntity;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 @Getter
 @Setter

@@ -13,6 +13,7 @@ soul:
 
             #忽略的URL:不会经过Security过滤器
             ignore-urls:
+              - /ws/**
               - /favicon.ico
               - /images/favicon.ico
               - /v3/api-docs/**

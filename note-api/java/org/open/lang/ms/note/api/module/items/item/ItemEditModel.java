@@ -12,6 +12,9 @@ import org.soul.base.support.model.common.BaseEditModel;
 @Setter
 @Schema(description = "詞條编辑")
 public class ItemEditModel extends BaseEditModel<String> {
+
+    public static final ItemEditModel NULL = new ItemEditModel();
+
     @Schema(description = "")
     private String id;
     @Schema(description = "詞條類型: 1=單詞, 2=句子")

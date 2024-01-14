@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.open.lang</groupId>
+        <artifactId>note</artifactId>
+        <version>1.0.1-SNAPSHOT</version>
+    </parent>
+    <groupId>org.open.lang</groupId>
+    <artifactId>note-ws</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <name>note-ws</name>
+    <description>note-ws</description>
+
+    <properties>
+        <start-class>org.open.lang.ms.note.ws.NoteWsApplication</start-class>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.soul</groupId>
+            <artifactId>soul-base</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+
+        <!--todo: websocket connect do the user jwt login?-->
+        <dependency>
+            <groupId>org.soul</groupId>
+            <artifactId>soul-ability-security-spring-local</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.soul</groupId>
+            <artifactId>soul-ability-security-spring-web</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.soul</groupId>
+            <artifactId>soul-ms-user-common</artifactId>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--    <groupId>org.soul</groupId>-->
+        <!--    <artifactId>soul-ability-web-springmvc</artifactId>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>java</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
+        <testSourceDirectory>test/java</testSourceDirectory>
+        <testResources>
+            <testResource>
+                <directory>test/resources</directory>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>${start-class}</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -8,6 +8,11 @@ spring:
     name: note
   profiles:
     active: dev
+  flyway:
+    enabled: false
+  main:
+    allow-bean-definition-overriding: true
+
 soul:
   ability:
     security:
@@ -17,6 +22,10 @@ soul:
       spring:
         jwt:
           enable: true
+        session:
+#          type: header
+          header:
+            name: SID
 
   ms:
     fserver:
@@ -36,3 +45,11 @@ springdoc:
     - group: node
       display-name: node book doc
       packages-to-scan: org.open.lang.ms.note.api.module
+
+
+logging:
+  # 指定日志配置环境
+  config: classpath:logback-spring.xml
+  level:
+    root: INFO
+    org.springframework.messaging: debug

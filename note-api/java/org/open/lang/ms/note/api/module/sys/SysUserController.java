@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
+import org.open.lang.ms.note.api.consts.TopicEnum;
 import org.open.lang.ms.note.api.module.sys.vo.SignUpVo;
 import org.open.lang.ms.note.api.module.user.UserService;
 import org.soul.ability.security.spring.core.authc.jwt.JwtTokenGenerator;
@@ -12,6 +13,8 @@ import org.soul.base.web.WebResult;
 import org.soul.ms.user.common.vo.login.UserInfoModel;
 import org.soul.ms.user.provider.entity.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "用户管理")
@@ -25,6 +28,7 @@ public class SysUserController {
     @Autowired
     private JwtTokenGenerator jwtTokenGenerator;
 
+    @SendTo(value = {TopicEnum.USER_SIGNUP})
     @Operation(summary = "",
             description = "",
             parameters = {

@@ -7,14 +7,13 @@
         <artifactId>note</artifactId>
         <version>1.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>org.open.lang</groupId>
     <artifactId>note-ws</artifactId>
     <version>1.0.1-SNAPSHOT</version>
     <name>note-ws</name>
+    <packaging>jar</packaging>
     <description>note-ws</description>
 
     <properties>
-        <start-class>org.open.lang.ms.note.ws.NoteWsApplication</start-class>
     </properties>
 
     <dependencies>
@@ -96,22 +95,6 @@
             </testResource>
         </testResources>
 
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>${start-class}</mainClass>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
     </build>
 
 </project>

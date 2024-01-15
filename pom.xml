@@ -55,8 +55,7 @@
 
     <modules>
         <module>note-api</module>
+        <module>note-ws</module>
     </modules>
-
-
 
 </project>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +17,7 @@ import javax.annotation.PostConstruct;
 
 @Configuration
 @ComponentScan(basePackages = "org.open.lang.ms.note.api")
+@Import(TomcatConfiguration.class)
 public class NoteConfiguration {
     private Log log = LogFactory.getLog(NoteConfiguration.class);
 

@@ -36,5 +36,7 @@ logs/*
 *.iml
 *.log
 
+.flattened-pom.xml
+
 /polaris/
 .codeGen

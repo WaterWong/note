@@ -5,10 +5,9 @@
     <parent>
         <groupId>org.open.lang</groupId>
         <artifactId>note</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>${note.version}</version>
     </parent>
     <artifactId>note-ws</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
     <name>note-ws</name>
     <packaging>jar</packaging>
     <description>note-ws</description>

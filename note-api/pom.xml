@@ -72,6 +72,13 @@
 		</dependency>
 		<!--endregion -->
 
+		<!--region ms log -->
+		<dependency>
+			<groupId>org.soul</groupId>
+			<artifactId>soul-ms-log-service</artifactId>
+		</dependency>
+		<!--endregion -->
+
 		<!--region tools-->
 		<dependency>
 			<groupId>org.soul</groupId>

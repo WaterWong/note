@@ -1,7 +1,6 @@
 package org.open.lang.ms.note.api.starter;
 
 
-import org.soul.ability.security.common.jwt.JwtEncoder;
 import org.soul.ability.security.spring.core.authc.jwt.DefaultJwtTokenGenerator;
 import org.soul.ability.security.spring.core.authc.jwt.JwtTokenGenerator;
 import org.soul.base.log.Log;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
 
 import javax.annotation.PostConstruct;
 

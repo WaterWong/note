@@ -48,15 +48,15 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/oneWord", method = RequestMethod.GET)
-    public ItemRecordResult recent( @RequestParam(required = true) String word) {
+    public ItemRecordResult recent( @RequestParam(name="word", required = true) String word) {
         UserInfoModel sysUser = UserTool.currentUser();
         return this.itemService.oneWord(word,sysUser.getId());
     }
 
     @RequestMapping(value = "/recent", method = RequestMethod.GET)
     public List<ItemRecordResult> recent(
-            @RequestParam(defaultValue = "10") int pageSize,
-            @RequestParam(defaultValue = "1") int pageNo)
+            @RequestParam(name="pageSize", defaultValue = "10") int pageSize,
+            @RequestParam(name="pageNo", defaultValue = "1") int pageNo)
     {
         UserInfoModel sysUser = UserTool.currentUser();
         return this.itemService.recent(pageNo,pageSize, sysUser.getId());
@@ -73,7 +73,7 @@ public class ItemController {
 
     @Deprecated(since = "1.0.1")
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public List<Item> search(@RequestParam String type,@RequestParam String word) {
+    public List<Item> search(@RequestParam(name="type") String type,@RequestParam(name="word") String word) {
         if (StringTool.isBlank(word)) {
             return ListTool.newArrayList();
         }

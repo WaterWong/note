@@ -21,7 +21,7 @@ public class ItemLogController {
     private ItemLogService itemLogService;
 
     @GetMapping("/one")
-    public List<Map<String, Integer>> stat(@RequestParam String itemId) {
+    public List<Map<String, Integer>> stat(@RequestParam(name="itemId") String itemId) {
         String userId = UserTool.currentUser().getId();
         return itemLogService.statByItemIdAndCreateUserId(itemId,userId);
     }

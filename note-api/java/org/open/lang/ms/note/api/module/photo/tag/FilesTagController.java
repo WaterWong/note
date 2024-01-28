@@ -11,7 +11,8 @@ import java.util.List;
 /**
  * 文件标签
  */
-@RestController("/photo/tag")
+@RestController
+@RequestMapping("/photo/tag")
 @Tag(name = "文件标签",description = "文件标签管理")
 public class FilesTagController extends BaseCrudController<String, FilesTagService, FilesTag> {
 

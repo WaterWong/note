@@ -2,13 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="org.open.lang.ms.note.api.module.exam.ExamMapper">
+
     <select id="generate" parameterType="org.open.lang.ms.note.api.module.exam.ExamCondition" resultType="org.open.lang.ms.note.api.module.items.item.Item">
         select * from item
         WHERE 1 = 1
             and create_time &gt;= #{dateStart} AND create_time &lt;= #{dateEnd}
             and create_user = #{createUser}
-            and type != '3' -- 语法无需测验
-            and is_understood = false --已掌握无需测验
+            and type != '3'
+            and is_understood = false
         <if test="itemType != '0'">
             and type = #{itemType}
         </if>

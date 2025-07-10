@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 
 @Configuration

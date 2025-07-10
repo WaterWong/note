@@ -24,17 +24,9 @@
 
     <repositories>
         <repository>
-            <id>thirdparty</id>
-            <name>thirdparty Repositories</name>
-            <url>http://nexus.soulworld.net/repository/thirdparty/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>maven-public</id>
             <name>Public Repositories</name>
-            <url>http://nexus.soulworld.net/repository/maven-public/</url>
+            <url>https://nexus.soulworld.net/repository/maven-public/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -46,7 +38,7 @@
             <dependency>
                 <groupId>org.soul</groupId>
                 <artifactId>soul-dependencies</artifactId>
-                <version>5.2.2-SNAPSHOT</version>
+                <version>5.4.1-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

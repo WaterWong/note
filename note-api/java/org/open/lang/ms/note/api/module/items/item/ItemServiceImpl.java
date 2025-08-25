@@ -92,9 +92,10 @@ public class ItemServiceImpl extends BaseCrudService<Item, ItemMapper, String> i
         String japanese = StringTool.defaultIfBlank(addVo.getJapanese(),"");
         String hiragana = StringTool.defaultIfBlank(addVo.getHiragana(),"");
         String chinese = StringTool.defaultIfBlank(addVo.getChinese(),"");
-        japanese = japanese.replaceAll("\s","");
-        hiragana = hiragana.replaceAll("\s","");
-        chinese  = chinese.replaceAll("\s","");
+        //notice: \s 后面是全角空格
+        japanese = japanese.replaceAll("^[\\s|　]*","").replaceAll("[\\s|　]*$","");
+        hiragana = hiragana.replaceAll("^[\\s|　]*","").replaceAll("[\\s|　]*$","");
+        chinese = chinese.replaceAll("^[\\s|　]*","").replaceAll("[\\s|　]*$","");
 
         addVo.setJapanese(japanese);
         addVo.setHiragana(hiragana);

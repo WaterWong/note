@@ -3,4 +3,4 @@ soul:
     jdbc:
       package-data-source:
         #service包使用数据源。_context代表为从sys_datasource匹配
-        org.soul.ability.log.audit.rdb.service: log
+        org.soul.ability.log.audit.rdb.normal.service: log

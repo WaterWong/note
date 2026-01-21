@@ -75,6 +75,11 @@
 		<!--region ms log -->
 		<dependency>
 			<groupId>org.soul</groupId>
+			<artifactId>soul-ability-log-audit-rdb-normal</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.soul</groupId>
 			<artifactId>soul-ms-log-service</artifactId>
 		</dependency>
 		<!--endregion -->

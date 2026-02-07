@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.open.lang</groupId>
         <artifactId>note</artifactId>
-        <version>${note.version}</version>
+        <version>${revision}</version>
     </parent>
     <artifactId>note-ws</artifactId>
     <name>note-ws</name>

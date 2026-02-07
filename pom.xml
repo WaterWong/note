@@ -5,13 +5,14 @@
     <groupId>org.open.lang</groupId>
     <artifactId>note</artifactId>
     <packaging>pom</packaging>
-    <version>${note.version}</version>
+    <version>${revision}</version>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
 
         <!--self-->
-        <note.version>1.4.3-SNAPSHOT</note.version>
+        <!--<note.version>1.4.3-SNAPSHOT</note.version>-->
+        <revision>1.4.3-SNAPSHOT</revision>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <argLine>-Dfile.encoding=UTF-8</argLine>
@@ -61,34 +62,6 @@
             </resource>
         </resources>
 
-        <plugins>
-            <!-- 统一版本号管理 -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.4.1</version>
-                <configuration>
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
     </build>
 
 </project>

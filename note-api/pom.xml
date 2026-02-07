@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.open.lang</groupId>
 		<artifactId>note</artifactId>
-		<version>${note.version}</version>
+		<version>${revision}</version>
 	</parent>
 	<packaging>jar</packaging>
 	<name>note-api</name>
@@ -100,7 +100,7 @@
 		<dependency>
 			<groupId>org.open.lang</groupId>
 			<artifactId>note-ws</artifactId>
-			<version>${note.version}</version>
+			<version>${revision}</version>
 		</dependency>
 
 		<dependency>

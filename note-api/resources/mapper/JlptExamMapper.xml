@@ -20,4 +20,11 @@
         order by "start_time" desc
     </select>
 
+    <delete id="deleteByCondition" parameterType="org.open.lang.ms.note.api.module.jlpt.vo.JlptExamCondition">
+        delete from "jlpt_exam"
+        where "create_user_id" = #{createUserId}
+          and "level" = #{level}
+          and "exam_ym" = #{examYm}
+    </delete>
+
 </mapper>

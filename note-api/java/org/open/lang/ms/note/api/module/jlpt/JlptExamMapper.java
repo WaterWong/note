@@ -14,4 +14,6 @@ public interface JlptExamMapper extends IBaseCrudMapper<JlptExam, String> {
     int historyCount(JlptExamCondition condition);
 
     List<JlptExam> historyList(JlptExamCondition condition);
+
+    int deleteByCondition(JlptExamCondition condition);
 }

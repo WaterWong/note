@@ -49,6 +49,18 @@ public class JlptExamController {
         return jlptExamService.saveAnswers(model);
     }
 
+    @PostMapping("/clearAnswers")
+    public boolean clearAnswers(@RequestBody JlptExamCondition condition) {
+        fillUser(condition);
+        return jlptExamService.clearAnswers(condition);
+    }
+
+    @PostMapping("/clearHistory")
+    public boolean clearHistory(@RequestBody JlptExamCondition condition) {
+        fillUser(condition);
+        return jlptExamService.clearHistory(condition);
+    }
+
     @PostMapping("/start")
     public JlptExam start(@RequestBody JlptExamCondition condition) {
         fillUser(condition);

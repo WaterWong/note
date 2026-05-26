@@ -74,6 +74,18 @@ public class JlptExamService extends BaseCrudService<JlptExam, JlptExamMapper, S
         return true;
     }
 
+    public boolean clearAnswers(JlptExamCondition condition) {
+        answerMapper.deleteByCondition(condition);
+        return true;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public boolean clearHistory(JlptExamCondition condition) {
+        recordMapper.deleteByCondition(condition);
+        mapper.deleteByCondition(condition);
+        return true;
+    }
+
     public JlptExam start(JlptExamCondition condition) {
         JlptExam exam = new JlptExam();
         exam.setLevel(condition.getLevel());

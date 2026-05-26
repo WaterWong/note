@@ -31,6 +31,12 @@ public class JlptExamController {
         return jlptExamService.historyCount(condition);
     }
 
+    @PostMapping("/historyList")
+    public List<JlptExamResult> historyList(@RequestBody JlptExamCondition condition) {
+        fillUser(condition);
+        return jlptExamService.historyList(condition);
+    }
+
     @PostMapping("/answers")
     public List<JlptExamAnswer> answers(@RequestBody JlptExamCondition condition) {
         fillUser(condition);

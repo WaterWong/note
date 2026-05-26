@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,19 @@ public class JlptExamService extends BaseCrudService<JlptExam, JlptExamMapper, S
 
     public int historyCount(JlptExamCondition condition) {
         return mapper.historyCount(condition);
+    }
+
+    public List<JlptExamResult> historyList(JlptExamCondition condition) {
+        List<JlptExam> exams = mapper.historyList(condition);
+        List<JlptExamResult> results = new ArrayList<>();
+        if (exams == null) {
+            return results;
+        }
+        for (JlptExam exam : exams) {
+            List<JlptExamRecord> records = recordMapper.listByExamId(exam.getId());
+            results.add(buildResult(exam, records));
+        }
+        return results;
     }
 
     public List<JlptExamAnswer> answers(JlptExamCondition condition) {

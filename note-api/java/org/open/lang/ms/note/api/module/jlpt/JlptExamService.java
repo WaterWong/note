@@ -28,6 +28,7 @@ public class JlptExamService extends BaseCrudService<JlptExam, JlptExamMapper, S
     private static final String STATUS_RUNNING = "RUNNING";
     private static final String STATUS_PAUSED = "PAUSED";
     private static final String STATUS_FINISHED = "FINISHED";
+    private static final long IDLE_PAUSE_MS = 5L * 60L * 1000L;
 
     @Autowired
     private JlptExamAnswerMapper answerMapper;
@@ -47,6 +48,7 @@ public class JlptExamService extends BaseCrudService<JlptExam, JlptExamMapper, S
         }
         for (JlptExam exam : exams) {
             List<JlptExamRecord> records = recordMapper.listByExamId(exam.getId());
+            autoPauseIfIdle(exam, records);
             results.add(buildResult(exam, records));
         }
         return results;
@@ -154,6 +156,39 @@ public class JlptExamService extends BaseCrudService<JlptExam, JlptExamMapper, S
 
         List<JlptExamRecord> records = recordMapper.listByExamId(exam.getId());
         return buildResult(exam, records);
+    }
+
+    private void autoPauseIfIdle(JlptExam exam, List<JlptExamRecord> records) {
+        if (!STATUS_RUNNING.equals(exam.getStatus())) {
+            return;
+        }
+        Date lastActive = resolveLastActiveTime(exam, records);
+        if (lastActive == null) {
+            return;
+        }
+        if (System.currentTimeMillis() - lastActive.getTime() <= IDLE_PAUSE_MS) {
+            return;
+        }
+        exam.setStatus(STATUS_PAUSED);
+        exam.setPauseTime(new Date());
+        mapper.updateOnly(exam, JlptExam.FIELD_STATUS, JlptExam.FIELD_PAUSE_TIME);
+    }
+
+    private Date resolveLastActiveTime(JlptExam exam, List<JlptExamRecord> records) {
+        Date lastActive = exam.getStartTime();
+        if (records == null) {
+            return lastActive;
+        }
+        for (JlptExamRecord record : records) {
+            if (StringTool.isBlank(record.getUserAnswer())) {
+                continue;
+            }
+            Date recordTime = record.getUpdateTime() != null ? record.getUpdateTime() : record.getCreateTime();
+            if (recordTime != null && (lastActive == null || recordTime.after(lastActive))) {
+                lastActive = recordTime;
+            }
+        }
+        return lastActive;
     }
 
     private Boolean calcResult(String userAnswer, String correctAnswer) {

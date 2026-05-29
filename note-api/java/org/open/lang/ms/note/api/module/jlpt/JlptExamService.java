@@ -192,7 +192,10 @@ public class JlptExamService extends BaseCrudService<JlptExam, JlptExamMapper, S
     }
 
     private Boolean calcResult(String userAnswer, String correctAnswer) {
-        if (StringTool.isBlank(userAnswer) || StringTool.isBlank(correctAnswer)) {
+        if (StringTool.isBlank(userAnswer)) {
+            return null;
+        }
+        if (StringTool.isBlank(correctAnswer)) {
             return false;
         }
         return userAnswer.equals(correctAnswer);
@@ -218,25 +221,35 @@ public class JlptExamService extends BaseCrudService<JlptExam, JlptExamMapper, S
         int questionCount = records == null ? 0 : records.size();
         int doubtCount = 0;
         int correctCount = 0;
+        int errorCount = 0;
+        int unansweredCount = 0;
         if (records != null) {
             for (JlptExamRecord record : records) {
                 if ("y".equalsIgnoreCase(record.getDoubtFlag())) {
                     doubtCount++;
                 }
+                if (StringTool.isBlank(record.getUserAnswer())) {
+                    unansweredCount++;
+                    continue;
+                }
                 if (Boolean.TRUE.equals(record.getResult())) {
                     correctCount++;
+                } else {
+                    errorCount++;
                 }
             }
         }
         result.setQuestionCount(questionCount);
         result.setDoubtCount(doubtCount);
         result.setCorrectCount(correctCount);
-        result.setErrorCount(questionCount - correctCount);
-        BigDecimal correctRate = questionCount == 0
+        result.setErrorCount(errorCount);
+        result.setUnansweredCount(unansweredCount);
+        int answeredCount = correctCount + errorCount;
+        BigDecimal correctRate = answeredCount == 0
                 ? BigDecimal.ZERO
                 : BigDecimal.valueOf(correctCount)
                     .multiply(BigDecimal.valueOf(100))
-                    .divide(BigDecimal.valueOf(questionCount), 2, RoundingMode.HALF_UP);
+                    .divide(BigDecimal.valueOf(answeredCount), 2, RoundingMode.HALF_UP);
         result.setCorrectRate(correctRate);
         return result;
     }

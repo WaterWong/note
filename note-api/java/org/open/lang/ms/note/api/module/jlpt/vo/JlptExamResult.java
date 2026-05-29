@@ -31,6 +31,9 @@ public class JlptExamResult {
     @Schema(description = "错误数")
     private Integer errorCount;
 
+    @Schema(description = "未答数")
+    private Integer unansweredCount;
+
     @Schema(description = "正确率")
     private BigDecimal correctRate;
 }

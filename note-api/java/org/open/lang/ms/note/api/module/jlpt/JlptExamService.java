@@ -96,10 +96,27 @@ public class JlptExamService extends BaseCrudService<JlptExam, JlptExamMapper, S
         return exam;
     }
 
-    public JlptExam pause(String examId) {
-        JlptExam exam = mapper.get(examId);
+    @Transactional(rollbackFor = Exception.class)
+    public JlptExam pause(JlptExamFinishModel model) {
+        JlptExam exam = mapper.get(model.getId());
         if (exam == null) {
             return null;
+        }
+        JlptExamCondition condition = new JlptExamCondition();
+        condition.setLevel(exam.getLevel());
+        condition.setExamYm(exam.getExamYm());
+        condition.setCreateUserId(exam.getCreateUserId());
+        Map<String, String> answerMap = buildAnswerMap(condition);
+
+        recordMapper.deleteByExamId(exam.getId());
+        if (model.getRecords() != null) {
+            for (JlptExamRecord record : model.getRecords()) {
+                record.setId(null);
+                record.setExamId(exam.getId());
+                record.setCorrectAnswer(answerMap.get(key(record.getSectionType(), record.getQuestionNo())));
+                record.setResult(calcResult(record.getUserAnswer(), record.getCorrectAnswer()));
+                recordMapper.insert(record);
+            }
         }
         exam.setStatus(STATUS_PAUSED);
         exam.setPauseTime(new Date());
@@ -118,11 +135,7 @@ public class JlptExamService extends BaseCrudService<JlptExam, JlptExamMapper, S
         condition.setLevel(exam.getLevel());
         condition.setExamYm(exam.getExamYm());
         condition.setCreateUserId(exam.getCreateUserId());
-        List<JlptExamAnswer> answers = answerMapper.listByCondition(condition);
-        Map<String, String> answerMap = new HashMap<>();
-        for (JlptExamAnswer answer : answers) {
-            answerMap.put(key(answer.getSectionType(), answer.getQuestionNo()), answer.getCorrectAnswer());
-        }
+        Map<String, String> answerMap = buildAnswerMap(condition);
 
         recordMapper.deleteByExamId(exam.getId());
         if (model.getRecords() != null) {
@@ -152,6 +165,15 @@ public class JlptExamService extends BaseCrudService<JlptExam, JlptExamMapper, S
 
     private String key(String sectionType, Integer questionNo) {
         return sectionType + "#" + questionNo;
+    }
+
+    private Map<String, String> buildAnswerMap(JlptExamCondition condition) {
+        List<JlptExamAnswer> answers = answerMapper.listByCondition(condition);
+        Map<String, String> answerMap = new HashMap<>();
+        for (JlptExamAnswer answer : answers) {
+            answerMap.put(key(answer.getSectionType(), answer.getQuestionNo()), answer.getCorrectAnswer());
+        }
+        return answerMap;
     }
 
     private JlptExamResult buildResult(JlptExam exam, List<JlptExamRecord> records) {

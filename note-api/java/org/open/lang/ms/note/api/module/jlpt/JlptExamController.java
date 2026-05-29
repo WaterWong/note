@@ -5,7 +5,6 @@ import org.open.lang.ms.note.api.module.jlpt.answer.JlptExamAnswer;
 import org.open.lang.ms.note.api.module.jlpt.vo.JlptExamAnswerSaveModel;
 import org.open.lang.ms.note.api.module.jlpt.vo.JlptExamCondition;
 import org.open.lang.ms.note.api.module.jlpt.vo.JlptExamFinishModel;
-import org.open.lang.ms.note.api.module.jlpt.vo.JlptExamIdModel;
 import org.open.lang.ms.note.api.module.jlpt.vo.JlptExamResult;
 import org.open.lang.ms.note.api.module.passport.UserTool;
 import org.soul.ms.user.common.vo.login.UserInfoModel;
@@ -68,8 +67,8 @@ public class JlptExamController {
     }
 
     @PostMapping("/pause")
-    public JlptExam pause(@RequestBody JlptExamIdModel model) {
-        return jlptExamService.pause(model.getId());
+    public JlptExam pause(@RequestBody JlptExamFinishModel model) {
+        return jlptExamService.pause(model);
     }
 
     @PostMapping("/finish")

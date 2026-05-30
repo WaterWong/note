@@ -62,6 +62,13 @@ public class ItemController {
         return this.itemService.recent(pageNo,pageSize, sysUser.getId());
     }
 
+    @Operation(description = "按条件分页查询词条列表")
+    @PostMapping(value = "/list")
+    public List<ItemRecordResult> list(@RequestBody ItemListCondition condition) {
+        UserInfoModel sysUser = UserTool.currentUser();
+        return this.itemService.recentByCondition(condition, sysUser.getId());
+    }
+
     @SendToUser(value = {TopicEnum.TOPIC + TopicEnum.ITEM_DELETED},broadcast = false)
     @RequestMapping(value = {"/remove"}, method = {RequestMethod.POST})
     public String delete(@RequestBody @Valid ItemEditModel model) {

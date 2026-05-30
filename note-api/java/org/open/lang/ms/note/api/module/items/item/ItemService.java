@@ -10,6 +10,8 @@ public interface ItemService extends IBaseCrudService<Item, String> {
 
     List<ItemRecordResult> recent(int pageNo, int pageSize, String createUserId);
 
+    List<ItemRecordResult> recentByCondition(ItemListCondition condition, String createUserId);
+
     ItemEditModel saveOrUpdate(ItemEditModel addVo);
 
     /**
